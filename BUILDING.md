@@ -31,8 +31,57 @@ export default {
 };
 ```
 
-Update `prerender` option in root layout
+Update `prerender` option in root layout `src/routes/+layout.js`
 ```js
 // This can be false if you're using a fallback (i.e. SPA mode)
 export const prerender = true;
+```
+
+## Adding tailwindcss
+Install Tailwind CSS
+```bash
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
+
+In your `svelte.config.js` file, import vitePreprocess to enable processing `<style>` blocks as PostCSS.
+```js
+import adapter from '@sveltejs/adapter-auto';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  kit: {
+    adapter: adapter()
+  },
+  preprocess: vitePreprocess()
+};
+export default config;
+```
+
+Add the paths to all of your template files in your `tailwind.config.js` file.
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: ['./src/**/*.{html,js,svelte,ts}'],
+  theme: {
+    extend: {}
+  },
+  plugins: []
+};
+```
+
+Create a `./src/app.css` file and add the @tailwind directives for each of Tailwind’s layers.
+```js
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+Create a `./src/routes/+layout.svelte` file and import the newly-created app.css file.
+```js
+<script>
+  import "../app.css";
+</script>
+
+<slot />
 ```
