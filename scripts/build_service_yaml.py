@@ -34,7 +34,7 @@ spec:
     - percent: 100
       latestRevision: true 
     """
-    save_path = pathlib.Path(__file__) / '../../ci/voicebox_service.yaml'
+    save_path = pathlib.Path(__file__) / '../../ci/sme_service.yaml'
     print(save_path)
     with open(save_path, 'w') as file:
         file.write(contents)
