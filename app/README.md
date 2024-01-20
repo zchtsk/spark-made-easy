@@ -1,38 +1,46 @@
-# create-svelte
+# Protocol
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Protocol is a [Tailwind UI](https://tailwindui.com) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org).
 
-## Creating a project
+## Getting started
 
-If you're seeing this, you've probably already done this step. Congrats!
+To get started with this template, first install the npm dependencies:
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+npm install
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Next, run the development server:
 
 ```bash
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
+Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
 
-To create a production version of your app:
+## Customizing
 
-```bash
-npm run build
-```
+You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
 
-You can preview the production build with `npm run preview`.
+## Global search
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+This template includes a global search that's powered by the [FlexSearch](https://github.com/nextapps-de/flexsearch) library. It's available by clicking the search input or by using the `⌘K` shortcut.
+
+This feature requires no configuration, and works out of the box by automatically scanning your documentation pages to build its index. You can adjust the search parameters by editing the `/src/mdx/search.mjs` file.
+
+## License
+
+This site template is a commercial product and is licensed under the [Tailwind UI license](https://tailwindui.com/license).
+
+## Learn more
+
+To learn more about the technologies used in this site template, see the following resources:
+
+- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
+- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
+- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
+- [Framer Motion](https://www.framer.com/docs/) - the official Framer Motion documentation
+- [MDX](https://mdxjs.com/) - the official MDX documentation
+- [Algolia Autocomplete](https://www.algolia.com/doc/ui-libraries/autocomplete/introduction/what-is-autocomplete/) - the official Algolia Autocomplete documentation
+- [FlexSearch](https://github.com/nextapps-de/flexsearch) - the official FlexSearch documentation
+- [Zustand](https://docs.pmnd.rs/zustand/getting-started/introduction) - the official Zustand documentation

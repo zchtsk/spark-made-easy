@@ -85,3 +85,9 @@ Create a `./src/routes/+layout.svelte` file and import the newly-created app.css
 
 <slot />
 ```
+
+## Setup Shiki for code blocks
+install shiki
+```bash
+npm install shiki
+```

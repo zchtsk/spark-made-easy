@@ -1,0 +1,48 @@
+export const metadata = {
+  title: 'Loading data',
+  description:
+    // a description about this Spark chapter that is very SEO friendly
+    'Learn how to load data into Spark from different sources.',
+}
+
+# Loading data
+
+With Spark, it's simple to load data of any familiar format from a variety of different sources. {{ className: "lead" }}
+
+## Spark supports all major data storage formats
+
+<Row>
+    <Col>
+    Let's start with a simple example. You can load
+    </Col>
+    <Col>
+    ```python {{ title: "PySpark" }}
+    from pyspark.sql import SparkSession
+
+    spark = SparkSession.builder.getOrCreate()
+
+    df = spark.read.format("csv").load("data.csv", header="true")
+    df = spark.read.format("parquet").load("data.parquet")
+    df = spark.read.format("json").load("data.jsonl")
+    ```
+    </Col>
+</Row>
+
+## Spark supports all major data storage formats
+
+<Row>
+    <Col>
+    Let's start with a simple example. You can load
+    </Col>
+    <Col>
+    ```python {{ title: "PySpark" }}
+    from pyspark.sql import SparkSession
+
+    spark = SparkSession.builder.getOrCreate()
+
+    df = spark.read.format("csv").load("data.csv", header="true")
+    df = spark.read.format("parquet").load("data.parquet")
+    df = spark.read.format("json").load("data.jsonl")
+    ```
+    </Col>
+</Row>

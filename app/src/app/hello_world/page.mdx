@@ -1,0 +1,33 @@
+export const metadata = {
+  title: 'Hello World',
+  description:
+    'Create a spark context and print hello world',
+}
+
+# Hello World
+
+One nice thing about Spark, is that under the hood, it's basically just a SQL dialect. {{ className: 'lead' }}
+<Row>
+    <Col>
+    First create a spark context.{{ className: 'pt-28 text-right' }}
+
+    From the spark context, you can run raw SQL commands.{{ className: 'text-right' }}
+    </Col>
+    <Col>
+    ```python {{ title: "PySpark" }}
+    from pyspark.sql import SparkSession
+
+    spark = SparkSession.builder.getOrCreate()
+
+    spark.sql("SELECT 'Hello World'").show()
+    ```
+
+    ```python {{ title: "output" }}
+    +-----------+
+    |        _c0|
+    +-----------+
+    |Hello World|
+    +-----------+
+    ```
+    </Col>
+</Row>

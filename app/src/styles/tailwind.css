@@ -1,0 +1,22 @@
+@layer base {
+  :root {
+    --shiki-color-text: #CCCCCC; /* Light gray for main text */
+    --shiki-token-constant: #56B6C2; /* Cyan-like color for constants */
+    --shiki-token-string: #98C379; /* Light green for strings */
+    --shiki-token-comment: #7F848E; /* Gray for comments */
+    --shiki-token-keyword: #C678DD; /* Soft purple for keywords */
+    --shiki-token-parameter: #D19A66; /* Orange for parameters */
+    --shiki-token-function: #61AFEF; /* Blue for functions */
+    --shiki-token-string-expression: #98C379; /* Light green for string expressions */
+    --shiki-token-punctuation: #ABB2BF; /* Light gray for punctuation */
+
+  }
+
+  [inert] ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

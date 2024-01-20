@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  easyspark:
+    build: .
+    image: zachtsk/protocol:latest
+    container_name: protocol
+    ports:
+      - 80:80

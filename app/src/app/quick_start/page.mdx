@@ -1,0 +1,54 @@
+export const metadata = {
+  title: 'Quickstart',
+  description:
+    'Set up a Spark-enabled environment with Docker in minutes.',
+}
+
+# Quick environment setup
+
+Spark is designed to scale with the amount of compute you have available, so typically people develop it in a cloud environment (e.g. Databricks, Dataproc, Codelab, EMR, Synapse).{{ className: 'lead' }}
+
+
+If you have access to a Spark cloud environment, then feel free to follow along in a notebook there. If not, then **we can use Docker to spin up a local Spark environment in a few minutes.** {{ className: 'lead' }}
+
+One last thing, for these examples, **we're going to focus on PySpark** (the Python API for Spark). {{ className: 'lead' }}
+
+## Download Docker
+Download and install docker [here](https://www.docker.com/get-started).
+
+## Create a file called `docker-compose.yaml` in your root directory
+<Row>
+    <Col>
+            This file tells Docker how to setup your environment. We won't go into the full
+            details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/)
+    </Col>
+    <Col>
+    ```dockerfile {{ title: 'docker-compose.yaml' }}
+    version: '3.8'
+    services:
+      jupyter:
+        image: jupyter/pyspark-notebook:latest
+        container_name: jupyter
+        working_dir: /notebooks
+        ports:
+          - 8888:8888
+        volumes:
+          - ./data/:/data
+          - ./notebooks/:/notebooks
+    ```
+    </Col>
+</Row>
+
+## Starting Docker
+
+**To start your docker container** run the following command in your terminal:
+
+```bash
+docker-compose up
+```
+## Stopping Docker
+
+**To stop your container** run the following:
+```bash
+docker-compose down
+```
