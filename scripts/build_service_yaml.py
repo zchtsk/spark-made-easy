@@ -8,7 +8,7 @@ def create_fastapi_service(image_name: str):
 apiVersion: serving.knative.dev/v1
 kind: Service
 metadata:
-  name: voicebox
+  name: spark-made-easy
   generation: 1
   annotations:
     run.googleapis.com/client-name: gcloud
