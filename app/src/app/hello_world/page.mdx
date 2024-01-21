@@ -11,7 +11,9 @@ One nice thing about Spark, is that under the hood, it's basically just a SQL di
     <Col>
     First create a spark context.{{ className: 'pt-28 text-right' }}
 
-    From the spark context, you can run raw SQL commands.{{ className: 'text-right' }}
+    You can use `sql()` to write raw sql queries. {{ className: 'text-right -mt-1' }}
+
+    Use can use `show()` to print your dataframe. {{ className: 'text-right -mt-1' }}
     </Col>
     <Col>
     ```python {{ title: "PySpark" }}
@@ -19,7 +21,9 @@ One nice thing about Spark, is that under the hood, it's basically just a SQL di
 
     spark = SparkSession.builder.getOrCreate()
 
-    spark.sql("SELECT 'Hello World'").show()
+    df = spark.sql("SELECT 'Hello World'")
+
+    df.show()
     ```
 
     ```python {{ title: "output" }}

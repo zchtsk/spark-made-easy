@@ -9,30 +9,34 @@ export const metadata = {
 
 With Spark, it's simple to load data of any familiar format from a variety of different sources. {{ className: "lead" }}
 
-## Spark supports all major data storage formats
+## First let's download some data...
 
 <Row>
     <Col>
-    Let's start with a simple example. You can load
+    Download an example dataset. One version of the data is in csv format, the other is in json.
     </Col>
     <Col>
     ```python {{ title: "PySpark" }}
-    from pyspark.sql import SparkSession
+    import requests
 
-    spark = SparkSession.builder.getOrCreate()
+    with open("/data/winemag-reviews.csv", "wb") as file:
+        csv_url = "http://tinyurl.com/winemag-reviews-csv"
+        file.write(requests.get(csv_url).content)
 
-    df = spark.read.format("csv").load("data.csv", header="true")
-    df = spark.read.format("parquet").load("data.parquet")
-    df = spark.read.format("json").load("data.jsonl")
+    with open("/data/winemag-reviews.json", "wb") as file:
+        json_url = "http://tinyurl.com/winemag-reviews-json"
+        file.write(requests.get(json_url).content)
     ```
     </Col>
 </Row>
 
-## Spark supports all major data storage formats
+## ...and then load it into a dataframe
 
 <Row>
     <Col>
-    Let's start with a simple example. You can load
+    Use `spark.read.format()` to specify the format of the data you want to load. Spark supports all major data storage formats, including csv, json, parquet, and many more.
+
+    You can use `.printSchema()` to see the schema of the data you loaded. {{ className: "mt-[220px]" }}
     </Col>
     <Col>
     ```python {{ title: "PySpark" }}
@@ -40,9 +44,31 @@ With Spark, it's simple to load data of any familiar format from a variety of di
 
     spark = SparkSession.builder.getOrCreate()
 
-    df = spark.read.format("csv").load("data.csv", header="true")
-    df = spark.read.format("parquet").load("data.parquet")
-    df = spark.read.format("json").load("data.jsonl")
+    csv_path = "/data/winemag-reviews.csv"
+    df1 = spark.read.format("csv").load(csv_path, header=True)
+
+    json_path = "/data/winemag-reviews.json"
+    df2 = spark.read.format("json").load(json_path)
+
+    df2.printSchema()
+    ```
+
+    ```python {{title: "Output"}}
+    root
+     |-- _c0: string (nullable = true)
+     |-- country: string (nullable = true)
+     |-- description: string (nullable = true)
+     |-- designation: string (nullable = true)
+     |-- points: string (nullable = true)
+     |-- price: string (nullable = true)
+     |-- province: string (nullable = true)
+     |-- region_1: string (nullable = true)
+     |-- region_2: string (nullable = true)
+     |-- taster_name: string (nullable = true)
+     |-- taster_twitter_handle: string (nullable = true)
+     |-- title: string (nullable = true)
+     |-- variety: string (nullable = true)
+     |-- winery: string (nullable = true)
     ```
     </Col>
 </Row>

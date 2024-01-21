@@ -199,23 +199,9 @@ export const navigation = [
       { title: '02 Setup', href: '/quick_start' },
       { title: '03 Hello World', href: '/hello_world' },
       { title: '04 Loading Data', href: '/load_data' },
-      // { title: 'SDKs', href: '/sdks' },
-      // { title: 'Authentication', href: '/authentication' },
-      // { title: 'Pagination', href: '/pagination' },
-      // { title: 'Errors', href: '/errors' },
-      // { title: 'Webhooks', href: '/webhooks' },
+      { title: '05 Modifying Dataframes', href: '/modifying_dataframes' },
     ],
   },
-  // {
-  //   title: 'Resources',
-  //   links: [
-  //     { title: 'Contacts', href: '/contacts' },
-  //     { title: 'Conversations', href: '/conversations' },
-  //     { title: 'Messages', href: '/messages' },
-  //     { title: 'Groups', href: '/groups' },
-  //     { title: 'Attachments', href: '/attachments' },
-  //   ],
-  // },
 ]
 
 export function Navigation(props) {
