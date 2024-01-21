@@ -1,0 +1,1 @@
+gcloud run services delete spark-made-easy --region=$REGION --quiet

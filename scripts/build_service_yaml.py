@@ -25,7 +25,7 @@ spec:
         - image: {image_name}
           ports:
             - name: http1
-              containerPort: 8080
+              containerPort: 80
           resources:
             limits:
               memory: 1024Mi
