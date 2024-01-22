@@ -105,14 +105,11 @@ function SmallPrint() {
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
       <div className="flex gap-4">
-        <SocialLink href="#" icon={XIcon}>
-          Follow us on X
+        <SocialLink href="/zchtsk" icon={XIcon}>
+          Follow on X
         </SocialLink>
-        <SocialLink href="#" icon={GitHubIcon}>
-          Follow us on GitHub
-        </SocialLink>
-        <SocialLink href="#" icon={DiscordIcon}>
-          Join our Discord server
+        <SocialLink href="/zachtsk" icon={GitHubIcon}>
+          Follow on GitHub
         </SocialLink>
       </div>
     </div>

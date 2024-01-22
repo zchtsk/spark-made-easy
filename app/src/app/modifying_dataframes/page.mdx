@@ -1,6 +1,115 @@
 export const metadata = {
-  title: 'Modifying Dataframes',
+  title: 'Basic Operations',
   description:
     // a description about this Spark chapter that is informative, convise, and very SEO friendly
     'Learn how to modify dataframes in Spark',
 }
+
+# Basic Operations for Modifying Dataframes
+
+In Spark, every operation you make to a dataframe is done in a functional way. This means that you are not modifying the dataframe itself, but rather creating a new dataframe with the modifications you want. {{className:"lead"}}
+
+Let's start by importing our data again.
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+csv_path = "/data/winemag-reviews.csv"
+df = spark.read.format("csv").load(csv_path, header=True)
+```
+
+## Selecting Columns
+You can use `select()` to select or rename columns in your dataframe.
+
+<Row>
+    <Col>
+    You can just pass your argument directly as a string. {{ className: "pt-20 text-right" }}
+
+    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
+    </Col>
+    <Col>
+    ```python {{title:"PySpark"}}
+    # Option 1)
+    df = df.select("points", "price")
+
+    # Option 2)
+    df = df.select(df["points"], df["price"])
+    df.show(4)
+    ```
+
+    ```python {{title:"Output"}}
+    +------+-----+
+    |points|price|
+    +------+-----+
+    |    87| NULL|
+    |    87| 15.0|
+    |    87| 14.0|
+    |    87| 13.0|
+    +------+-----+
+    ```
+    </Col>
+</Row>
+
+## Filtering
+You can use `where()` or `filter()` to filter your dataset. They are 100% interchangible. I'm not sure why there are two different functions for the same thing, but there are. Onwards.
+
+<Row>
+    <Col>
+    You can just pass your filter as an argument directly. {{ className: "pt-20 text-right" }}
+
+    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
+    </Col>
+    <Col>
+    ```python {{title:"PySpark"}}
+    # Option 1)
+    df = df.where("points > 90")
+
+    # Option 2)
+    df = df.where(df["points"] > 90)
+    df.show(4)
+    ```
+
+     ```python {{title:"Output"}}
+    +------+-----+
+    |points|price|
+    +------+-----+
+    |    92| 80.0|
+    |    92| 70.0|
+    |    92| 36.0|
+    |    92| 39.0|
+    +------+-----+
+    ```
+    </Col>
+</Row>
+
+## New Columns
+You can use `withColumn()` to add a new column to your dataframe. **Unlike the previous functions, you cannot pass a column name as a string**. You must use `F.col()` or reference the column from the dataframe object.
+
+<Row>
+    <Col>
+    You can use `F.col()` to reference a column. {{ className: "pt-20 text-right" }}
+
+    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
+    </Col>
+    <Col>
+    ```python {{title:"PySpark"}}
+    # Option 1)
+    df = df.withColumn("points_plus_10", F.col("points") + 10)
+
+    # Option 2)
+    df = df.withColumn("points_plus_10", df["points"] + 10)
+    df.show(4)
+    ```
+
+    ```python {{title:"Output"}}
+    +------+-----+--------------+
+    |points|price|points_plus_10|
+    +------+-----+--------------+
+    |    92| 80.0|           102|
+    |    92| 70.0|           102|
+    |    92| 36.0|           102|
+    |    92| 39.0|           102|
+    +------+-----+--------------+
+    ```
+    </Col>
+</Row>

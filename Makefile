@@ -4,7 +4,7 @@ build_npm:
 build: build_npm
 	doppler run -- docker-compose build
 
-deploy:
+deploy: build
 	doppler run --command="sh ./scripts/deploy.sh"
 
 undeploy:
