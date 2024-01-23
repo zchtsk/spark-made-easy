@@ -199,7 +199,8 @@ export const navigation = [
       { title: '02 Setup', href: '/quick_start' },
       { title: '03 Hello World', href: '/hello_world' },
       { title: '04 Loading Data', href: '/load_data' },
-      { title: '05 Column Selection', href: '/column_operations' },
+      { title: '05 Column Selection', href: '/column_selection' },
+      { title: '06 Modiyfing Dataframes', href: '/modifying_dataframes' },
     ],
   },
 ]

@@ -1,115 +1,80 @@
 export const metadata = {
-  title: 'Basic Operations',
+  title: 'Modifying Dataframes',
   description:
-    // a description about this Spark chapter that is informative, convise, and very SEO friendly
-    'Learn how to modify dataframes in Spark',
+    // SEO friendly description
+    'Modifying Dataframes',
 }
 
-# Basic Operations for Modifying Dataframes
+# Modifying Dataframes
 
-In Spark, every operation you make to a dataframe is done in a functional way. This means that you are not modifying the dataframe itself, but rather creating a new dataframe with the modifications you want. {{className:"lead"}}
+Create a new column with `.withColumn()` or on the fly with `.selectExpr()`.a
 
-Let's start by importing our data again.
-```python
-from pyspark.sql import SparkSession
+Let's set up some test data and create some new calculated columns.
+
+<Note>
+    **Note:** We're now including `from pyspark.sql import functions as F` with our imports.
+    This is a common convention in PySpark and makes it easier to quickly access any functions in the module
+    that you might need for development.
+</Note>
+
+```python {{title: "PySpark"}}
+from pyspark.sql import SparkSession, functions as F
 
 spark = SparkSession.builder.getOrCreate()
-csv_path = "/data/winemag-reviews.csv"
-df = spark.read.format("csv").load(csv_path, header=True)
+
+# Create dummy dataframe
+df_src = spark.sql("""
+select 'John' as name, 23 as age, 2000 as birth_year UNION ALL
+select 'Jessie' as name, 24 as age, 1999 as birth_year
+""")
+df_src.show()
+
+#  +------+---+----------+
+#  |  name|age|birth_year|
+#  +------+---+----------+
+#  |  John| 23|      2000|
+#  |Jessie| 24|      1999|
+#  +------+---+----------+
 ```
 
-## Selecting Columns
-You can use `select()` to select or rename columns in your dataframe.
+## Step-by-step updates
 
-<Row>
-    <Col>
-    You can just pass your argument directly as a string. {{ className: "pt-20 text-right" }}
+One method for making changes to a dataframe is to create or update a dataframe with each step.
 
-    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
-    </Col>
-    <Col>
-    ```python {{title:"PySpark"}}
-    # Option 1)
-    df = df.select("points", "price")
+```python {{title: "Python"}}
+df = df_src
+df = df.withColumn("double_age", F.col("age") * 2)  # Using column object
+df = df.withColumn("quad_age", F.expr("age * 4"))   # Using expressions
+df = df.withColumn("current_year", F.lit(2024))     # Assigning a literal value
+df = df.withColumn("current_year2", F.expr("2024")) # You can also assign a literal from an expression
+df.show()
 
-    # Option 2)
-    df = df.select(df["points"], df["price"])
-    df.show(4)
-    ```
+#  +------+---+----------+----------+--------+------------+-------------+
+#  |  name|age|birth_year|double_age|quad_age|current_year|current_year2|
+#  +------+---+----------+----------+--------+------------+-------------+
+#  |  John| 23|      2000|        46|      92|        2024|         2024|
+#  |Jessie| 24|      1999|        48|      96|        2024|         2024|
+#  +------+---+----------+----------+--------+------------+-------------+
+```
 
-    ```python {{title:"Output"}}
-    +------+-----+
-    |points|price|
-    +------+-----+
-    |    87| NULL|
-    |    87| 15.0|
-    |    87| 14.0|
-    |    87| 13.0|
-    +------+-----+
-    ```
-    </Col>
-</Row>
+## Chained updates
 
-## Filtering
-You can use `where()` or `filter()` to filter your dataset. They are 100% interchangible. I'm not sure why there are two different functions for the same thing, but there are. Onwards.
+Another method is to chain the updates together. This is a bit more concise, but at the expense of being a bit more complex to debug.
 
-<Row>
-    <Col>
-    You can just pass your filter as an argument directly. {{ className: "pt-20 text-right" }}
+```python {{title: "Python"}}
+df = (
+    df_src
+    .withColumn("double_age", F.col("age") * 2)  # Using column object
+    .withColumn("quad_age", F.expr("age * 4"))   # Using expressions
+    .withColumn("current_year", F.lit(2024))     # Assigning a literal value
+    .withColumn("current_year2", F.expr("2024")) # You can also assign a literal from an expression
+)
+df.show()
 
-    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
-    </Col>
-    <Col>
-    ```python {{title:"PySpark"}}
-    # Option 1)
-    df = df.where("points > 90")
-
-    # Option 2)
-    df = df.where(df["points"] > 90)
-    df.show(4)
-    ```
-
-     ```python {{title:"Output"}}
-    +------+-----+
-    |points|price|
-    +------+-----+
-    |    92| 80.0|
-    |    92| 70.0|
-    |    92| 36.0|
-    |    92| 39.0|
-    +------+-----+
-    ```
-    </Col>
-</Row>
-
-## New Columns
-You can use `withColumn()` to add a new column to your dataframe. **Unlike the previous functions, you cannot pass a column name as a string**. You must use `F.col()` or reference the column from the dataframe object.
-
-<Row>
-    <Col>
-    You can use `F.col()` to reference a column. {{ className: "pt-20 text-right" }}
-
-    You can reference the column from the dataframe object. {{ className: "pt-6 text-right" }}
-    </Col>
-    <Col>
-    ```python {{title:"PySpark"}}
-    # Option 1)
-    df = df.withColumn("points_plus_10", F.col("points") + 10)
-
-    # Option 2)
-    df = df.withColumn("points_plus_10", df["points"] + 10)
-    df.show(4)
-    ```
-
-    ```python {{title:"Output"}}
-    +------+-----+--------------+
-    |points|price|points_plus_10|
-    +------+-----+--------------+
-    |    92| 80.0|           102|
-    |    92| 70.0|           102|
-    |    92| 36.0|           102|
-    |    92| 39.0|           102|
-    +------+-----+--------------+
-    ```
-    </Col>
-</Row>
+#  +------+---+----------+----------+--------+------------+-------------+
+#  |  name|age|birth_year|double_age|quad_age|current_year|current_year2|
+#  +------+---+----------+----------+--------+------------+-------------+
+#  |  John| 23|      2000|        46|      92|        2024|         2024|
+#  |Jessie| 24|      1999|        48|      96|        2024|         2024|
+#  +------+---+----------+----------+--------+------------+-------------+
+```

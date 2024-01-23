@@ -1,0 +1,79 @@
+export const metadata = {
+  title: 'Column Selection',
+  description:
+    // a description about this Spark chapter that is very SEO friendly
+    'Common column operations.',
+}
+
+# Column Selection
+
+There are a few different ways to select columns from a dataframe. In this chapter, we'll go over the `select()` and `selectExpr()` functions.
+
+## Build a dummy dataframe
+
+Let's create a simple row of data to work with using the spark.sql() function.
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+df = spark.sql("select 'John' as name, 23 as age, 2000 as birth_year")
+df.show()
+
+#  +----+---+----------+
+#  |name|age|birth_year|
+#  +----+---+----------+
+#  |John| 23|      2000|
+#  +----+---+----------+
+```
+
+## Using `select()`
+
+There are a few different ways you can reference dataframe columns.
+
+```python {{title:"Python"}}
+from pyspark.sql import functions as F
+
+df = df_src.select(
+    "name",                                 # You can pass column names as a <string>
+    "age",
+    df_src["age"].alias("birth_age1"),      # You can use bracket notation df["column_name"]
+    F.col("age").alias("birth_age2"),       # You can use a column function F.col("column_name")
+    F.lit(2024).alias("current_year"),      # You can create literals on the fly with F.lit()
+    F.expr("age * 2 as double_birth_age"),  # You can also use raw SQL logic with F.expr()
+    F.expr("2024 as current_year"),         # You can also create literals with F.expr()
+)
+df.show()
+
+#  +----+---+----------+----------+------------+----------------+------------+
+#  |name|age|birth_age1|birth_age2|current_year|double_birth_age|current_year|
+#  +----+---+----------+----------+------------+----------------+------------+
+#  |John| 23|        23|        23|        2024|              46|        2024|
+#  +----+---+----------+----------+------------+----------------+------------+
+```
+
+## Using `selectExpr()`
+
+With the `.selectExpr()` method, all arguments are treated as SQL statements, as if you were using F.expr().
+
+```python
+df = df_src.selectExpr(
+    "name",
+    "age",
+    "age as birth_year",
+    "2024 as current_year",
+    "age * 2 as double_birth_age",
+)
+df.show()
+
+#  +----+---+----------+------------+----------------+
+#  |name|age|birth_year|current_year|double_birth_age|
+#  +----+---+----------+------------+----------------+
+#  |John| 23|        23|        2024|              46|
+#  +----+---+----------+------------+----------------+
+```
+
+<Note>
+  **Remember:** `F.col`, `F.lit`, `F.expr` all return a Column object.
+</Note>
