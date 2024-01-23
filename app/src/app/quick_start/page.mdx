@@ -18,8 +18,10 @@ Download and install docker [here](https://www.docker.com/get-started).
 
 ## Create a file called `docker-compose.yaml` in your root directory
 
-This file tells Docker how to setup your environment. We won't go into the full
-details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/)
+This file will setup a Spark-enabled Jupyter environment. It will also mount local `./data` and `./notebooks` folders to the container so you can access them from inside the Docker container. If the folders do not exist already they will be created automatically.
+
+We won't go into the full
+details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/).
 
 ```dockerfile {{ title: 'docker-compose.yaml' }}
 version: '3.8'
@@ -27,12 +29,12 @@ services:
   jupyter:
     image: jupyter/pyspark-notebook:latest
     container_name: jupyter
-    working_dir: /notebooks
+    working_dir: /notebooks                 # Working directory inside container
     ports:
-      - 8888:8888
+      - 8888:8888                           # map local port 8888 to container port 8888
     volumes:
-      - ./data/:/data
-      - ./notebooks/:/notebooks
+      - ./data/:/data                       # mount local `./data` folder to `/data` inside container
+      - ./notebooks/:/notebooks             # mount local `./notebooks` folder to `/notebooks` inside container
 ```
 
 ## Starting Docker
@@ -42,6 +44,14 @@ services:
 ```bash
 docker-compose up
 ```
+
+One the container is up and running, you should see a link to access Jupyter in your browser. It will look something like this:
+
+```bash
+jupyter  | [I 2024-01-23 17:50:34.864 ServerApp] Jupyter Server 2.8.0 is running at:
+jupyter  | [I 2024-01-23 17:50:34.864 ServerApp] http://127.0.0.1:8888/lab?token=xxxxxxxxx
+```
+
 ## Stopping Docker
 
 **To stop your container** run the following:

@@ -7,7 +7,7 @@ export const metadata = {
 
 # Column Selection
 
-To perform any transformation on your dataframe, you're going to be working with columns, so it's important to understand how to work with them.
+There are a few different ways to select columns from a dataframe. In this chapter, we'll go over the `select()` and `selectExpr()` functions.
 
 ## Build a dummy dataframe
 
@@ -55,21 +55,37 @@ df.show()
 +----+
 ```
 
-**Why might you want to use the first two methods when you can just pass a string in?** Well, when using the column object to select data, you can also use the `alias()` function to rename the column or `cast()` to change the data type.
+## Using `select()` with literals and expressions
+
+You can also use the `select()` function to create new columns using literals and expressions.
+
+`F.lit` is used to create a column of literal values.
+
+`F.expr` is used to create a column of expressions. For example, using a case statement to create a new column based on the values of other columns.
 
 ```python
-df = df.select(df["name"].alias("first_name"), df["age"].cast("float"))
-# or
-df = df.select(F.col("name").alias("first_name"), F.col("age").cast("float"))
+from pyspark.sql import functions as F
+
+# recreate our dataframe
+df = spark.sql("select 'John' as name, 23 as age, 2000 as birth_year")
+
+df = df.select(
+    "name",
+    "age",
+    F.lit("USA").alias("country"),
+    F.expr("case when age > 21 then 'adult' else 'minor' end").alias("age_group")
+)
+df.show()
 ```
 
 ```python {{title: "Output"}}
-+----------+----+
-|first_name| age|
-+----------+----+
-|      John|23.0|
-+----------+----+
++----+---+-------+---------+
+|name|age|country|age_group|
++----+---+-------+---------+
+|John| 23|    USA|    adult|
++----+---+-------+---------+
 ```
+
 
 ## Using `selectExpr()`
 
@@ -90,3 +106,7 @@ df.show()
 |     Kevin|           35|
 +----------+-------------+
 ```
+
+<Note>
+  **Remember:** `F.col`, `F.lit`, `F.expr` all return a Column object.
+</Note>
