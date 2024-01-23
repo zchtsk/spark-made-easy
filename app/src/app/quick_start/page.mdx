@@ -17,27 +17,23 @@ One last thing, for these examples, **we're going to focus on PySpark** (the Pyt
 Download and install docker [here](https://www.docker.com/get-started).
 
 ## Create a file called `docker-compose.yaml` in your root directory
-<Row>
-    <Col>
-            This file tells Docker how to setup your environment. We won't go into the full
-            details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/)
-    </Col>
-    <Col>
-    ```dockerfile {{ title: 'docker-compose.yaml' }}
-    version: '3.8'
-    services:
-      jupyter:
-        image: jupyter/pyspark-notebook:latest
-        container_name: jupyter
-        working_dir: /notebooks
-        ports:
-          - 8888:8888
-        volumes:
-          - ./data/:/data
-          - ./notebooks/:/notebooks
-    ```
-    </Col>
-</Row>
+
+This file tells Docker how to setup your environment. We won't go into the full
+details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/)
+
+```dockerfile {{ title: 'docker-compose.yaml' }}
+version: '3.8'
+services:
+  jupyter:
+    image: jupyter/pyspark-notebook:latest
+    container_name: jupyter
+    working_dir: /notebooks
+    ports:
+      - 8888:8888
+    volumes:
+      - ./data/:/data
+      - ./notebooks/:/notebooks
+```
 
 ## Starting Docker
 

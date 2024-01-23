@@ -108,7 +108,7 @@ function SmallPrint() {
         <SocialLink href="/zchtsk" icon={XIcon}>
           Follow on X
         </SocialLink>
-        <SocialLink href="/zachtsk" icon={GitHubIcon}>
+        <SocialLink href="/zchtsk" icon={GitHubIcon}>
           Follow on GitHub
         </SocialLink>
       </div>

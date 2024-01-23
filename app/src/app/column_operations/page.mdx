@@ -1,0 +1,92 @@
+export const metadata = {
+  title: 'Column Selection',
+  description:
+    // a description about this Spark chapter that is very SEO friendly
+    'Common column operations.',
+}
+
+# Column Selection
+
+To perform any transformation on your dataframe, you're going to be working with columns, so it's important to understand how to work with them.
+
+## Build a dummy dataframe
+
+Let's create a simple row of data to work with using the spark.sql() function.
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+df = spark.sql("select 'John' as name, 23 as age, 2000 as birth_year")
+df.show()
+```
+
+```python {{title: "Output"}}
++----+---+----------+
+|name|age|birth_year|
++----+---+----------+
+|John| 23|      2000|
++----+---+----------+
+```
+
+## Using `select()`
+
+The `select()` function allows you to select columns from a dataframe.
+
+```python
+# Method 1) Bracket notation
+df = df.select(df["name"])
+
+# Method 2) Using column function
+from python.sql import functions as F
+df = df.select(F.col("name"))
+
+# Method 3) Using a string of the column name
+df = df.select("name")
+df.show()
+```
+
+```python {{title: "Output"}}
++----+
+|name|
++----+
+|John|
++----+
+```
+
+**Why might you want to use the first two methods when you can just pass a string in?** Well, when using the column object to select data, you can also use the `alias()` function to rename the column or `cast()` to change the data type.
+
+```python
+df = df.select(df["name"].alias("first_name"), df["age"].cast("float"))
+# or
+df = df.select(F.col("name").alias("first_name"), F.col("age").cast("float"))
+```
+
+```python {{title: "Output"}}
++----------+----+
+|first_name| age|
++----------+----+
+|      John|23.0|
++----------+----+
+```
+
+## Using `selectExpr()`
+
+The `selectExpr()` function allows you to pass in SQL expressions as strings. This is useful for performing operations on columns at the same time as you are selecting them.
+
+```python
+# recreate our dataframe
+df = spark.sql("select 'Kevin' as name, 34 as age, 1990 as birth_year")
+
+df = df.selectExpr("name as first_name", "age + 1 as age_next_year")
+df.show()
+```
+
+```python {{title: "Output"}}
++----------+-------------+
+|first_name|age_next_year|
++----------+-------------+
+|     Kevin|           35|
++----------+-------------+
+```

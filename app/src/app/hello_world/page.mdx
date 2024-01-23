@@ -7,31 +7,28 @@ export const metadata = {
 # Hello World
 
 One nice thing about Spark, is that under the hood, it's basically just a SQL dialect. {{ className: 'lead' }}
-<Row>
-    <Col>
-    First create a spark context.{{ className: 'pt-28 text-right' }}
 
-    You can use `sql()` to write raw sql queries. {{ className: 'text-right -mt-1' }}
+<Note>
+  The entry point to Spark is the `spark` session object. This is used to tell your Spark cluster what you want to do, whether it's reading data, writing data, or executing a query.
+</Note>
 
-    Use can use `show()` to print your dataframe. {{ className: 'text-right -mt-1' }}
-    </Col>
-    <Col>
-    ```python {{ title: "PySpark" }}
-    from pyspark.sql import SparkSession
+```python {{ title: "PySpark" }}
+from pyspark.sql import SparkSession
 
-    spark = SparkSession.builder.getOrCreate()
+# 1) Create a spark context
+spark = SparkSession.builder.getOrCreate()
 
-    df = spark.sql("SELECT 'Hello World'")
+# 2) You can use `sql()` to write raw sql queries
+df = spark.sql("SELECT 'Hello World'")
 
-    df.show()
-    ```
+# 3) You can use `show()` to print your dataframe
+df.show()
+```
 
-    ```python {{ title: "output" }}
-    +-----------+
-    |        _c0|
-    +-----------+
-    |Hello World|
-    +-----------+
-    ```
-    </Col>
-</Row>
+```python {{ title: "Output" }}
++-----------+
+|        _c0|
++-----------+
+|Hello World|
++-----------+
+```
