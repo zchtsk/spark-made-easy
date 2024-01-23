@@ -21,6 +21,8 @@ spec:
         autoscaling.knative.dev/minScale: '0'
         autoscaling.knative.dev/maxScale: '1'
     spec:
+      containerConcurrency: 500
+      timeoutSeconds: 300
       containers:
         - image: {image_name}
           ports:
