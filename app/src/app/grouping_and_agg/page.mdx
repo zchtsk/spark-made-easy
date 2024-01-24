@@ -16,7 +16,7 @@ from pyspark.sql import SparkSession, functions as F
 spark = SparkSession.builder.getOrCreate()
 
 # load from dataset we downloaded earlier
-df = spark.read.format("json").load("/data/winemag-reviews.json", header=True)
+df = spark.read.format("json").load("/data/winemag-reviews.json")
 df = df.select("country","description","points","price","taster_name","title","variety")
 df.show(4)
 
