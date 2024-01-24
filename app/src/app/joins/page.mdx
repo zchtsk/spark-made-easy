@@ -43,7 +43,7 @@ Let's filter our dataframe above to just show results from the reviewer with the
 most_reviews_df = (
     df
     .where("taster_name IS NOT NULL")
-    .groupby("taster_name")
+    .groupBy("taster_name")
     .agg(F.count("*").alias("ct_reviews"))
     .orderBy(F.desc("ct_reviews")) # .orderBy() works the same as in SQL
     .limit(1)                      # .limit() also works the same as in SQL
@@ -126,8 +126,7 @@ Here's an example.
 
 ```python {{title:"Python"}}
 result_df = (
-    df
-    .alias("src") # (1) You can alias your datasets at any step
+    df.alias("src") # (1) You can alias your datasets at any step
     .join(
         most_reviews_df.alias("most"),
         on=F.expr("src.taster_name == most.taster_name"), # (2) Use an expression to join your columns
