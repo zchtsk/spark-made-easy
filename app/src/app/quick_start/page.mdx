@@ -29,12 +29,12 @@ services:
   jupyter:
     image: jupyter/pyspark-notebook:latest
     container_name: jupyter
-    working_dir: /notebooks                 # Working directory inside container
+    working_dir: /notebooks      # Working directory inside container
     ports:
-      - 8888:8888                           # map local port 8888 to container port 8888
+      - 8888:8888                # map local port 8888 to container port 8888
     volumes:
-      - ./data/:/data                       # mount local `./data` folder to `/data` inside container
-      - ./notebooks/:/notebooks             # mount local `./notebooks` folder to `/notebooks` inside container
+      - ./data/:/data            # mount local `./data` folder to `/data` inside container
+      - ./notebooks/:/notebooks  # mount local `./notebooks` folder to `/notebooks` inside container
 ```
 
 ## Starting Docker
