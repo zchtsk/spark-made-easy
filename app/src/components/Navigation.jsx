@@ -201,6 +201,9 @@ export const navigation = [
       { title: '04 Loading Data', href: '/load_data' },
       { title: '05 Column Selection', href: '/column_selection' },
       { title: '06 Modiyfing Dataframes', href: '/modifying_dataframes' },
+      { title: '07 Grouping and Aggregation', href: '/grouping_and_agg' },
+      { title: '08 Joins', href: '/joins' },
+      { title: '09 Window Functions', href: '/window_functions' },
     ],
   },
 ]

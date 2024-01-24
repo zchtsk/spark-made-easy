@@ -1,0 +1,56 @@
+export const metadata = {
+  title: 'Grouping and Aggregation',
+  description:
+    // a long description about this Spark chapter that is very SEO friendly
+    'This chapter covers how to group and aggregate data in Spark. It covers the basics of grouping and aggregating data, as well as advanced topics like how to use window functions to group and aggregate data in more complex ways.',
+}
+
+# Grouping and Aggregation
+
+Let's do some aggregations. We'll start by loading some data. {{className:"lead"}}
+
+```python {{title:"Python"}}
+from pyspark.sql import SparkSession, functions as F
+
+# Initialize spark context
+spark = SparkSession.builder.getOrCreate()
+
+# load from dataset we downloaded earlier
+df = spark.read.format("json").load("/data/winemag-reviews.json", header=True)
+df = df.select("country","description","points","price","taster_name","title","variety")
+df.show(4)
+
+#  +--------+--------------------+------+-----+------------------+--------------------+--------------+
+#  | country|         description|points|price|       taster_name|               title|       variety|
+#  +--------+--------------------+------+-----+------------------+--------------------+--------------+
+#  |   Italy|Aromas include tr...|    87| NULL|     Kerin O’Keefe|Nicosia 2013 Vulk...|   White Blend|
+#  |Portugal|This is ripe and ...|    87|   15|        Roger Voss|Quinta dos Avidag...|Portuguese Red|
+#  |      US|Tart and snappy, ...|    87|   14|      Paul Gregutt|Rainstorm 2013 Pi...|    Pinot Gris|
+#  |      US|Pineapple rind, l...|    87|   13|Alexander Peartree|St. Julian 2013 R...|      Riesling|
+#  +--------+--------------------+------+-----+------------------+--------------------+--------------+
+```
+
+## Using `.groupBy()` and `.agg()`
+
+If you know SQL, then this syntax should look familiar. Let's calculate the average score & price given by each wine taster.
+
+```python {{title:"Python"}}
+df_agg = (
+    df
+    .groupBy("taster_name")
+    .agg(
+        F.avg("points").alias("avg_score"), # using column functions
+        F.expr("avg(price) as avg_price"),  # using expressions
+    )
+)
+df_agg.show(4)
+
+#  +------------------+-----------------+------------------+
+#  |       taster_name|        avg_score|         avg_price|
+#  +------------------+-----------------+------------------+
+#  |        Roger Voss|88.70800344908677| 38.64996034106682|
+#  |   Susan Kostrzewa|86.60921658986175|22.908667287977632|
+#  |Anna Lee C. Iijima|88.41562853907135| 29.79011215381094|
+#  |  Sean P. Sullivan|88.75573902537253|34.085888324873096|
+#  +------------------+-----------------+------------------+
+```
