@@ -4,6 +4,7 @@ import { Providers } from '@/app/providers'
 import { Layout } from '@/components/Layout'
 
 import '@/styles/tailwind.css'
+import {Canonical} from "@/components/Canonical";
 
 export const metadata = {
   title: {
@@ -25,7 +26,8 @@ export default async function RootLayout({ children }) {
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
     <script async src="https://umami.tsklp.co/script.js" data-website-id="f0b51c77-8a62-4d7e-8766-1f522814ecde"></script>
-      <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900">
+    <Canonical></Canonical>
+    <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900">
         <Providers>
           <div className="w-full">
             <Layout allSections={allSections}>{children}</Layout>
