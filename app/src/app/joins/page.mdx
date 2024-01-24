@@ -132,7 +132,7 @@ result_df = (
         on=F.expr("src.taster_name == most.taster_name"), # (2) Use an expression to join your columns
         how="inner"
     )
-    .select("src.*") # (3) Select only the columns from the "src" dataframe
+    .select("src.*") # (3) Select all columns from the "src" dataframe
 )
 
 result_df.show(4)
