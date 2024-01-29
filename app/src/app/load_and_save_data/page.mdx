@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Loading data',
+  title: 'Loading and Saving Data',
   description:
     // a description about this Spark chapter that is very SEO friendly
     'Learn how to load data into Spark from different sources.',
@@ -9,7 +9,7 @@ export const metadata = {
 
 With Spark, it's simple to load data of any familiar format from a variety of different sources. {{ className: "lead" }}
 
-## First let's download some data...
+**First let's download some data...**
 
 Download an example dataset. One version of the data is in csv format, the other is in json.
 
@@ -25,7 +25,7 @@ with open("/data/winemag-reviews.json", "wb") as file:
     file.write(requests.get(json_url).content)
 ```
 
-## ...and then load it into a dataframe
+## Loading Files
 
 Use `spark.read.format()` to specify the format of the data you want to load. Spark supports all major data storage formats, including csv, json, parquet, and many more.
 
@@ -60,3 +60,43 @@ df2.printSchema()
 #   |-- variety: string (nullable = true)
 #   |-- winery: string (nullable = true)
 ```
+
+## Saving Files
+
+You can write your dataframe with the `write` attribute. When saving a file, you typically need to specify a few parameters:
+- specify the write `.mode()`
+- specify the save file format with `.format()`
+- (optional) indicate if you want partitioned columns with `.partitionBy()`
+
+```python
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+json_path = "/data/winemag-reviews.json"
+df = spark.read.format("json").load(json_path)
+
+# E.g. Writing to parquet
+out_fp = "/data/winemag-reviews.parquet"
+df.write.mode("overwrite").format("parquet").save(out_fp) # if data already exists, overwrite
+df.write.mode("append").format("parquet").save(out_fp) # if data exists, append, otherwise create
+df.write.mode("error").format("parquet").save(out_fp) # if data already exists, throw exception
+df.write.mode("ignore").format("parquet").save(out_fp) # if data alread exists, do nothing
+
+# E.g. Writing with partitions
+out_fp = "/data/winemag-reviews.parquet"
+(
+    df.write.mode("overwrite")
+    .format("parquet")
+    .partitionBy("variety")
+    .save(out_fp)
+)
+```
+
+<Note>
+**Quick note on using partitions**: Partitioning can greatly improve query performance. You generally want to partition on columns that are used frequently in your queries, but you have to be careful not to select a column that will create too many partitions.
+
+A partition does not working like an index in SQL. If you're working with customer transaction data, you might be tempted to partition on `customer_id`, but you'd end up with a partition for every customer. However, partitioning on `year-month` or `date` might be a good idea.
+</Note>
+
+This is just a starting point. For more information [check out the official docs](https://spark.apache.org/docs/latest/sql-data-sources-load-save-functions.html).

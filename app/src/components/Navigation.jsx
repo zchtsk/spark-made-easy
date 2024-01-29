@@ -198,7 +198,7 @@ export const navigation = [
       { title: '00 Introduction', href: '/' },
       { title: '02 Setup', href: '/quick_start' },
       { title: '03 Hello World', href: '/hello_world' },
-      { title: '04 Loading Data', href: '/load_data' },
+      { title: '04 Loading and Saving Data', href: '/load_and_save_data' },
       { title: '05 Column Selection', href: '/column_selection' },
       { title: '06 Modiyfing Dataframes', href: '/modifying_dataframes' },
       { title: '07 Grouping and Aggregation', href: '/grouping_and_agg' },
