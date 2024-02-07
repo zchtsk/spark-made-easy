@@ -13,7 +13,7 @@ With Spark, it's simple to load data of any familiar format from a variety of di
 
 Download an example dataset. One version of the data is in csv format, the other is in json.
 
-```python {{ title: "PySpark" }}
+```python {{ title: "Python" }}
 import requests
 
 with open("/data/winemag-reviews.csv", "wb") as file:
@@ -31,7 +31,7 @@ Use `spark.read.format()` to specify the format of the data you want to load. Sp
 
 You can use `.printSchema()` to see the schema of the data you loaded.
 
-```python {{ title: "PySpark" }}
+```python {{ title: "Python" }}
 from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.getOrCreate()
