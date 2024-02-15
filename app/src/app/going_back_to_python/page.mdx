@@ -1,0 +1,44 @@
+export const metadata = {
+  title: 'Exporting data to native python',
+  description: 'It is simple to move data back and forth between Spark and Python.'
+}
+
+# Going Back to Python
+Spark offers a few different ways to move your data to and from native Python. One popular way is by converting your Spark dataframe into a Pandas dataframe. Alternatively, you can convert your Spark dataframe directly to a Python list of objects (specifically, a list of "Row" objects, with an attribute for each column in your table). {{ className: 'lead' }}
+
+
+## Converting to Native Python
+
+```python {{title: "python"}}
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+# Create a Spark DataFrame with some dummy data
+df = spark.createDataFrame([(1, 2.0), (1, 4.0), (3, 6.0), (3, 8.0)], ("a", "b"))
+
+# Convert to Python objects with .collect() to get a list of Row objects
+data = df.collect()
+
+# Alternatively, you can collect as a list of dictionaries
+data = [row.asDict() for row in df.collect()]
+```
+
+## Converting to Pandas
+
+```python {{title: "python"}}
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+# Create a Spark DataFrame with some dummy data
+df = spark.createDataFrame([(1, 2.0), (1, 4.0), (3, 6.0), (3, 8.0)], ("a", "b"))
+
+# Convert to Pandas DF with .toPandas()
+pdf = df.toPandas()
+
+# Convert Pandas DF to Spark DF using the same .createDataFrame() method
+df2 = spark.createDataFrame(pdf)
+```
+
+That's it!  {{ className: 'lead' }}
