@@ -1,0 +1,25 @@
+export const metadata = {
+  title: 'Exporting data to pandas',
+  description: 'It is simple to move data back and forth between Spark and Pandas'
+}
+
+# Exporting to Pandas
+
+There may be times where you need to move data into or out of Pandas. Luckily, Spark comes with a few methods for transforming between Spark and Pandas dataframes.  {{ className: 'lead' }}
+
+```python {{title: "python"}}
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.getOrCreate()
+
+# Create a Spark DataFrame with some dummy data
+df = spark.createDataFrame([(1, 2.0), (1, 4.0), (3, 6.0), (3, 8.0)], ("a", "b"))
+
+# Convert to Pandas DF with .toPandas()
+pdf = df.toPandas()
+
+# Convert Pandas DF to Spark DF using the same .createDataFrame() method
+df2 = spark.createDataFrame(pdf)
+```
+
+That's it!  {{ className: 'lead' }}

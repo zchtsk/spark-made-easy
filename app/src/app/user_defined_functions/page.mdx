@@ -6,9 +6,13 @@ export const metadata = {
 # User Defined Functions
 
 User Defined Functions (UDFs) allow for flexibility in data processing, beyond what is available in standard Spark DataFrame operations.
-There are two general flavors of UDFs: (1) **Standard Spark UDFs** which use native python (2) **Pandas UDFs** which pass your selects data to a pandas dataframe.
+There are two general flavors of UDFs: {{ className: 'lead' }}
 
-We'll go through a quick example of each. First let's load our data.
+(1) **Standard Spark UDFs** which use native python {{ className: 'lead' }}
+
+(2) **Pandas UDFs** which pass your selects data to a pandas dataframe. {{ className: 'lead' }}
+
+We'll go through a quick example of each. First let's load our data. {{ className: 'lead' }}
 
 ```python {{ title: 'python' }}
 from pyspark.sql import SparkSession, functions as F
