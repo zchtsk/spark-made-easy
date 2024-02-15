@@ -205,6 +205,7 @@ export const navigation = [
             {title: '08 Joins', href: '/joins'},
             {title: '09 Window Functions', href: '/window_functions'},
             {title: '10 User Defined Functions (UDFs)', href: '/user_defined_functions'},
+            {title: '11 Moving data into Pandas', href: '/moving_data_into_pandas'},
         ],
     },
 ]
