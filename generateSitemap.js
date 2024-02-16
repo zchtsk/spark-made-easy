@@ -1,3 +1,4 @@
+// create sitemap.xml
 const fs = require('fs');
 const path = require('path');
 
@@ -36,3 +37,13 @@ const sitemapXml = `
 `.trim();
 
 fs.writeFileSync(path.resolve(__dirname, './app/out/sitemap.xml'), sitemapXml);
+
+// Create robots.txt
+const robotsTxt = `
+User-agent: *
+Allow: /
+
+Sitemap: ${domain}/sitemap.xml
+`.trim();
+
+fs.writeFileSync(path.resolve(__dirname, './app/out/robots.txt'), robotsTxt);
