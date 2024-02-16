@@ -1,8 +1,11 @@
 build_npm:
 	cd app && doppler run -- npm run build
 
-build: build_npm
+build: build_npm build_sitemap
 	doppler run -- docker-compose build
+
+build_sitemap:
+	node generateSitemap.js
 
 deploy: build
 	doppler run --command="sh ./scripts/deploy.sh"
