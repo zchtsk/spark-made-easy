@@ -12,7 +12,7 @@ Let's set up some test data and create some new calculated columns. {{className:
 <Note>
     **Note:** We're now including `from pyspark.sql import functions as F` with our imports.
     This is a common convention in PySpark and makes it easier to quickly access any functions in the module
-    that you might need for development.
+    that you might need for development.{{ className: "lead" }}
 </Note>
 
 ```python {{title: "PySpark"}}
@@ -37,7 +37,7 @@ df_src.show()
 
 ## Step-by-step updates
 
-One method for making changes to a dataframe is to create or update a dataframe with each step.
+One method for making changes to a dataframe is to create or update a dataframe with each step.{{ className: "lead" }}
 
 ```python {{title: "Python"}}
 df = df_src
@@ -57,7 +57,7 @@ df.show()
 
 ## Chained updates
 
-Another method is to chain the updates together. This is a bit more concise, but at the expense of being a bit more complex to debug.
+Another method is to chain the updates together. This is a bit more concise, but at the expense of being a bit more complex to debug.{{ className: "lead" }}
 
 ```python {{title: "Python"}}
 df = (

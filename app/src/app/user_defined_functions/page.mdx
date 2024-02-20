@@ -37,15 +37,15 @@ df.show(4)
 
 ## Standard UDFs
 
-Standard UDFs can be accessed through the same `functions`  module that we've been importing and aliasing as `F`.
+Standard UDFs can be accessed through the `functions`  module that we've been importing and aliasing as `F`.{{ className: "lead" }}
 
-UDFs accept three parameters:
-* `f`: (function) → python function.
-* (Optional) `returnType`: (pyspark.sql.types.DataType or str) → the return type of the user-defined function.
-* (Optional) `useArrow`: (bool) → Determines whether to use Arrow to optimize the (de)serialization.
+UDFs accept three parameters:{{ className: "lead" }}
+* `f`: (function) → python function.{{ className: "lead" }}
+* (Optional) `returnType`: (pyspark.sql.types.DataType or str) → the return type of the user-defined function.{{ className: "lead" }}
+* (Optional) `useArrow`: (bool) → Determines whether to use Arrow to optimize the (de)serialization.{{ className: "lead" }}
 
 ```python {{title:"python"}}
-# 1. Define them as new objects
+# Method 1. Define them as new objects
 reverse_word = F.udf(lambda s: s[::-1], "String")
 
 df.select("country", reverse_word("country").alias("yrtnuoc")).show(4, True)
@@ -59,7 +59,7 @@ df.select("country", reverse_word("country").alias("yrtnuoc")).show(4, True)
 # |      US|      SU|
 # +--------+--------+
 
-# 2. Use them as a decorator
+# Method 2. Use them as a decorator
 @F.udf("String") # return type
 def reverse_word2(col) -> int:
     return col[::-1]
@@ -78,9 +78,9 @@ df.select("country", reverse_word2("country").alias("yrtnuoc")).show(4, True)
 
 ## Pandas UDFs
 
-Pandas UDFs allow you to pass your data to a function as a pandas series in a highly efficient manner. For more information [see here](https://docs.databricks.com/en/udf/pandas.html).
+Pandas UDFs allow you to pass your data to a function as a pandas series in a highly efficient manner. For more information [see here](https://docs.databricks.com/en/udf/pandas.html).{{ className: "lead" }}
 
-Let's create a new dataset and see an example.
+Let's create a new dataset and see an example.{{ className: "lead" }}
 
 ```python {{title: "python"}}
 import pandas as pd
