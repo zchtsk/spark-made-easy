@@ -34,9 +34,9 @@ df.show(4)
 
 ## "Simple" Joins
 
-You can join two dataframes together using the `.join()` method on a common set of columns.
+You can join two dataframes together using the `.join()` method on a common set of columns.{{ className: "lead" }}
 
-Let's filter our dataframe above to just show results from the reviewer with the most reviews.
+Let's filter our dataframe above to just show results from the reviewer with the most reviews.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 # Let's filter to the reviewer with the most reviews
@@ -72,7 +72,7 @@ result_df.show(4)
 
 ## "Complex" Joins
 
-You can also join two dataframes together using conditional column logic. Let's look at the previous example again, with explicit conditional column logic.
+You can also join two dataframes together using conditional column logic. Let's look at the previous example again, with explicit conditional column logic.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 result_df = df.join(
@@ -91,7 +91,7 @@ result_df.show(4)
 #  |  France|This is a dry win...|    87|   30| Roger Voss|Leon Beyer 2012 G...|Gewürztraminer| Roger Voss|     25514|
 #  +--------+--------------------+------+-----+-----------+--------------------+--------------+-----------+----------+
 ```
-**Did you notice that the `taster_name` column was duplicated?** This is because we used explicit column logic to join the two dataframes together. You can use `.drop()` to remove the duplicate column, however, you need to be careful to specify which dataframe you want to drop the column from.
+**Did you notice that the `taster_name` column was duplicated?** This is because we used explicit column logic to join the two dataframes together. You can use `.drop()` to remove the duplicate column, however, you need to be careful to specify which dataframe you want to drop the column from.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 result_df = df.join(
@@ -112,17 +112,17 @@ result_df.show(4)
 #  +--------+--------------------+------+-----+--------------------+--------------+-----------+----------+
 ```
 
-**Let's be honest though, that whole query got pretty ugly.** Let's try to clean it up.
+**Let's be honest though, that whole query got pretty ugly.** Let's try to clean it up.{{ className: "lead" }}
 
 ## Suggested Approach
 
-Generally, joins are where people tend to shoot themselves in the foot. It's easy to blow up your dataset through duplication, mix up columns through column duplication, or to just make a mess of things.
+Generally, joins are where people tend to shoot themselves in the foot. It's easy to blow up your dataset through duplication, mix up columns through column duplication, or to just make a mess of things.{{ className: "lead" }}
 
-1. **Be as explicit with columns** being included in each dataset before you join.
-2. **If you are joining on the exact same columns in both dataframes**, use the "simple" method.
-3. **If you have to do "complex" joins, use expressions and aliasing** your dataframes. (See below)
+1. **Be as explicit with columns** being included in each dataset before you join.{{ className: "lead" }}
+2. **If you are joining on the exact same columns in both dataframes**, use the "simple" method.{{ className: "lead" }}
+3. **If you have to do "complex" joins, use expressions and aliasing** your dataframes. (See below){{ className: "lead" }}
 
-Here's an example.
+Here's an example.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 result_df = (
