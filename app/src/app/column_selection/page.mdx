@@ -11,7 +11,7 @@ There are a few different ways to select columns from a dataframe. {{className:"
 
 ## Build a dummy dataframe
 
-Let's create a simple row of data to work with using the spark.sql() function.
+Let's create a simple row of data to work with using the spark.sql() function.{{ className: "lead" }}
 
 ```python
 from pyspark.sql import SparkSession
@@ -30,7 +30,7 @@ df.show()
 
 ## Using `.select()`
 
-This is the most common way to select columns. You can pass in a list of column names or Column objects.
+This is the most common way to select columns. You can pass in a list of column names or Column objects.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 from pyspark.sql import functions as F
@@ -55,7 +55,7 @@ df.show()
 
 ## Using `.selectExpr()`
 
-With the `.selectExpr()` method, all arguments are treated as SQL statements, as if you were using F.expr().
+With the `.selectExpr()` method, all arguments are treated as SQL statements, as if you were using F.expr().{{ className: "lead" }}
 
 ```python
 df = df_src.selectExpr(
@@ -75,5 +75,5 @@ df.show()
 ```
 
 <Note>
-  **Remember:** `F.col`, `F.lit`, `F.expr` all return a Column object.
+  **Remember:** `F.col`, `F.lit`, `F.expr` all return a Column object.{{ className: "lead" }}
 </Note>
