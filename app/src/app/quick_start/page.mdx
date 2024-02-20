@@ -1,27 +1,38 @@
 export const metadata = {
   title: 'Quickstart',
   description:
-    'Set up a Spark-enabled environment with Docker in minutes.',
+    'Set up a Spark-enabled environment in minutes.',
 }
 
-# Quick environment setup
+# Setting up a Spark Environment
 
-Spark is designed to scale with the amount of compute you have available, so typically people develop it in a cloud environment (e.g. Databricks, Dataproc, Codelab, EMR, Synapse).{{ className: 'lead' }}
+Spark is designed to scale with the amount of compute you have available. It generally it requires a bit more setup to test locally,  usually people work with Spark in a cloud environment (e.g. Databricks, Dataproc, Colab, EMR, Synapse).{{ className: 'lead' }}
 
 
-If you have access to a Spark cloud environment, then feel free to follow along in a notebook there. If not, then **we can use Docker to spin up a local Spark environment in a few minutes.** {{ className: 'lead' }}
+If you have access to a Spark cloud environment, then feel free to follow along in a notebook there. If not, there are a few options to quickly get started. We'll focus on two different ways to get setup: {{ className: 'lead' }}
+
+1. With a cloud notebook via Google Colab {{ className: 'lead' }}
+2. With a local notebook running in Docker {{ className: 'lead' }}
 
 One last thing, for these examples, **we're going to focus on PySpark** (the Python API for Spark). {{ className: 'lead' }}
 
-## Download Docker
-Download and install docker [here](https://www.docker.com/get-started).
+## Method #1: Cloud Notebook (with Colab)
 
-## Create a file called `docker-compose.yaml` in your root directory
+If you want to skip setting up anything on your machine, you're in luck. With cloud notebook environments like Google Colab, everything you need to get started is already set up for you. [Here's a link to try it out](https://colab.research.google.com/drive/1VlhSvlTmcb861k6qhaqi86WI-iJZX9Yg?usp=sharing). {{ className: 'lead' }}
 
-This file will setup a Spark-enabled Jupyter environment. It will also mount local `./data` and `./notebooks` folders to the container so you can access them from inside the Docker container. If the folders do not exist already they will be created automatically.
+## Method #2: Local Notebook (with Docker)
+
+If you prefer to work locally, then we can also get started quickly using Docker. Docker provides a containerized environment that can be pre-configured to run whatever software you need. If you're new to Docker, you can learn more [here](https://www.docker.com/). {{ className: 'lead' }}
+
+### 1. Download Docker
+First, be sure to [download and install docker](https://www.docker.com/get-started). {{className: "lead"}}
+
+### 2. Create a file called `docker-compose.yaml` in your project's root directory
+
+This file will setup a Spark-enabled Jupyter environment. It will also mount local `./data` and `./notebooks` folders to the container so you can access them from inside the Docker container. If the folders do not exist already they will be created automatically. {{className: "lead"}}
 
 We won't go into the full
-details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/).
+details of Docker Compose here, but you can read more about it [here](https://docs.docker.com/compose/). {{className: "lead"}}
 
 ```dockerfile {{ title: 'docker-compose.yaml' }}
 version: '3.8'
@@ -29,15 +40,24 @@ services:
   jupyter:
     image: jupyter/pyspark-notebook:latest
     container_name: jupyter
-    working_dir: /notebooks      # Working directory inside container
+    working_dir: /notebooks
     ports:
-      - 8888:8888                # map local port 8888 to container port 8888
+      - 8888:8888
     volumes:
-      - ./data/:/data            # mount local `./data` folder to `/data` inside container
-      - ./notebooks/:/notebooks  # mount local `./notebooks` folder to `/notebooks` inside container
+      - ./data/:/data
+      - ./notebooks/:/notebooks
 ```
 
-## Starting Docker
+When you're done, your folder structure should look something like the following: {{className: "lead"}}
+
+```text
+myproject/
+  ├─ data/        <- optional - will be created automatically if it doesn't exist
+  ├─ notebooks/   <- optional - will be created automatically if it doesn't exist
+  ╰─ docker-compose.yaml
+```
+
+### 3. Start Docker
 
 **To start your docker container** run the following command in your terminal:
 
@@ -45,16 +65,16 @@ services:
 docker-compose up
 ```
 
-One the container is up and running, you should see a link to access Jupyter in your browser. It will look something like this:
+One the container is up and running, you should see a link to access Jupyter in your browser. It will look something like this: {{className: "lead"}}
 
 ```bash
 jupyter  | [I 2024-01-23 17:50:34.864 ServerApp] Jupyter Server 2.8.0 is running at:
 jupyter  | [I 2024-01-23 17:50:34.864 ServerApp] http://127.0.0.1:8888/lab?token=xxxxxxxxx
 ```
 
-## Stopping Docker
+### 4. Stop Docker
 
-**To stop your container** run the following:
+**To stop your container** run the following: {{className: "lead"}}
 ```bash
 docker-compose down
 ```
