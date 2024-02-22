@@ -36,7 +36,7 @@ const sitemapXml = `
 </urlset>
 `.trim();
 
-fs.writeFileSync(path.resolve(__dirname, './app/out/sitemap.xml'), sitemapXml);
+fs.writeFileSync(path.resolve(__dirname, '../app/out/sitemap.xml'), sitemapXml);
 
 // Create robots.txt
 const robotsTxt = `
@@ -46,4 +46,4 @@ Allow: /
 Sitemap: ${domain}/sitemap.xml
 `.trim();
 
-fs.writeFileSync(path.resolve(__dirname, './app/out/robots.txt'), robotsTxt);
+fs.writeFileSync(path.resolve(__dirname, '../app/out/robots.txt'), robotsTxt);
