@@ -35,9 +35,9 @@ df_src.show()
 #  +------+---+----------+
 ```
 
-## Step-by-step updates
+## Sequential updates
 
-One method for making changes to a dataframe is to create or update a dataframe with each step.{{ className: "lead" }}
+One method for making changes to a dataframe is to create or update a dataframe through sequential variable assignment using `=`.{{ className: "lead" }}
 
 ```python {{title: "Python"}}
 df = df_src
@@ -57,7 +57,7 @@ df.show()
 
 ## Chained updates
 
-Another method is to chain the updates together. This is a bit more concise, but at the expense of being a bit more complex to debug.{{ className: "lead" }}
+You can also update your dataframe directly with [method chaining](https://www.tutorialspoint.com/Explain-Python-class-method-chaining). This is a bit more concise, but at the expense of being a bit more complex to debug, since you are applying multiple operations in a single step.{{ className: "lead" }}
 
 ```python {{title: "Python"}}
 df = (
