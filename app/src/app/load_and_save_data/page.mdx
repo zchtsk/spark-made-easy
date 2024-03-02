@@ -9,12 +9,17 @@ export const metadata = {
 
 With Spark, it's simple to load data of any familiar format from a variety of different sources.{{ className: "lead" }}
 
+(Example notebook can be found [here](https://colab.research.google.com/drive/15wVQ_UdFJgUYtdFAAJhKPFZX2DDst7d7?usp=sharing)){{ className: 'lead' }}
+
 **First let's download some data...**{{ className: "lead" }}
 
 Download an example dataset. One version of the data is in csv format, the other is in json.{{ className: "lead" }}
 
 ```python {{ title: "Python" }}
 import requests
+import os
+
+os.makedirs("/data", exist_ok=True)
 
 with open("/data/winemag-reviews.csv", "wb") as file:
     csv_url = "http://tinyurl.com/winemag-reviews-csv"
