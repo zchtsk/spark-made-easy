@@ -9,6 +9,8 @@ export const metadata = {
 
 There are a few different ways to select columns from a dataframe. {{className:"lead"}}
 
+(Example notebook can be found [here](https://colab.research.google.com/drive/1MuGaZOrCZI0zM74SiNb-ewqNN_eYH50D?usp=sharing)){{ className: 'lead' }}
+
 ## Build a dummy dataframe
 
 Let's create a simple row of data to work with using the spark.sql() function.{{ className: "lead" }}
@@ -18,8 +20,8 @@ from pyspark.sql import SparkSession
 
 spark = SparkSession.builder.getOrCreate()
 
-df = spark.sql("select 'John' as name, 23 as age, 2000 as birth_year")
-df.show()
+df_src = spark.sql("select 'John' as name, 23 as age, 2000 as birth_year")
+df_src.show()
 
 #  +----+---+----------+
 #  |name|age|birth_year|
