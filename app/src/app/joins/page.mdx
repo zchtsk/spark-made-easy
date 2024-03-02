@@ -134,7 +134,10 @@ result_df = (
         on=F.expr("src.taster_name == most.taster_name"), # (2) Use an expression to join your columns
         how="inner"
     )
-    .select("src.*") # (3) Select all columns from the "src" dataframe
+    .select(
+        "src.*",                                  # (3) Explicitly select only the columns you need from
+        "most.taster_name as tasted_most_wines"   #     from each data source
+    )
 )
 
 result_df.show(4)
