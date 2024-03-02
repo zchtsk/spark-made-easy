@@ -134,20 +134,22 @@ result_df = (
         on=F.expr("src.taster_name == most.taster_name"), # (2) Use an expression to join your columns
         how="inner"
     )
-    .select(
-        "src.*",                                  # (3) Explicitly select only the columns you need from
-        "most.taster_name as tasted_most_wines"   #     from each data source
+    .selectExpr(
+        "most.taster_name as tasted_most_wines", # (3) Explicitly select only the columns you need from
+        "src.title",                             #     from each data source
+        "src.points",
+        "src.price",
+        "src.variety",
     )
 )
 
 result_df.show(4)
-
-#  +--------+--------------------+------+-----+-----------+--------------------+--------------+
-#  | country|         description|points|price|taster_name|               title|       variety|
-#  +--------+--------------------+------+-----+-----------+--------------------+--------------+
-#  |Portugal|This is ripe and ...|    87|   15| Roger Voss|Quinta dos Avidag...|Portuguese Red|
-#  |  France|This dry and rest...|    87|   24| Roger Voss|Trimbach 2012 Gew...|Gewürztraminer|
-#  |  France|This has great de...|    87|   27| Roger Voss|Jean-Baptiste Ada...|    Pinot Gris|
-#  |  France|This is a dry win...|    87|   30| Roger Voss|Leon Beyer 2012 G...|Gewürztraminer|
-#  +--------+--------------------+------+-----+-----------+--------------------+--------------+
+# +-----------------+--------------------+------+-----+--------------+
+# |tasted_most_wines|               title|points|price|       variety|
+# +-----------------+--------------------+------+-----+--------------+
+# |       Roger Voss|Quinta dos Avidag...|    87|   15|Portuguese Red|
+# |       Roger Voss|Trimbach 2012 Gew...|    87|   24|Gewürztraminer|
+# |       Roger Voss|Jean-Baptiste Ada...|    87|   27|    Pinot Gris|
+# |       Roger Voss|Leon Beyer 2012 G...|    87|   30|Gewürztraminer|
+# +-----------------+--------------------+------+-----+--------------+
 ```
