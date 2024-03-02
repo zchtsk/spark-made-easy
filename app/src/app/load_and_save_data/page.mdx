@@ -84,9 +84,9 @@ df = spark.read.format("json").load(json_path)
 # E.g. Writing to parquet
 out_fp = "/data/winemag-reviews.parquet"
 df.write.mode("overwrite").format("parquet").save(out_fp) # if data already exists, overwrite
-df.write.mode("append").format("parquet").save(out_fp) # if data exists, append, otherwise create
-df.write.mode("error").format("parquet").save(out_fp) # if data already exists, throw exception
-df.write.mode("ignore").format("parquet").save(out_fp) # if data alread exists, do nothing
+# df.write.mode("append").format("parquet").save(out_fp) # if data exists, append, otherwise create
+# df.write.mode("error").format("parquet").save(out_fp) # if data already exists, throw exception
+# df.write.mode("ignore").format("parquet").save(out_fp) # if data alread exists, do nothing
 
 # E.g. Writing with partitions
 out_fp = "/data/winemag-reviews.parquet"
