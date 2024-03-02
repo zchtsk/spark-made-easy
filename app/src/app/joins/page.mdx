@@ -128,9 +128,9 @@ Here's an example.{{ className: "lead" }}
 
 ```python {{title:"Python"}}
 result_df = (
-    df.alias("src") # (1) You can alias your datasets at any step
+    df.alias("src") # (1a) You can alias your datasets at any step
     .join(
-        most_reviews_df.alias("most"),
+        most_reviews_df.alias("most"), # (1b) Alias your joining dataset as well
         on=F.expr("src.taster_name == most.taster_name"), # (2) Use an expression to join your columns
         how="inner"
     )
