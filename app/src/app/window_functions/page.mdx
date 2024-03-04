@@ -7,7 +7,7 @@ export const metadata = {
 
 # Window Functions
 
-Window functions allow us to aggregate over different slices of our dataframe in a single step.{{ className: "lead" }}
+Window functions allow us to aggregate over different slices of our dataframe in a single step. These work the same way in Spark that they do in normal SQL. You can create Window'ed functions using [`pyspark.sql.Window`](https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/api/pyspark.sql.Window.html) or using `F.expr` with plain SQL syntax. {{ className: "lead" }}
 
 Let's start with a question "What are the top 3 wines for each reviewer"?{{ className: "lead" }}
 
