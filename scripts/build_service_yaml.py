@@ -19,7 +19,7 @@ spec:
     metadata:
       annotations:
         autoscaling.knative.dev/minScale: '0'
-        autoscaling.knative.dev/maxScale: '1'
+        autoscaling.knative.dev/maxScale: '3'
     spec:
       containerConcurrency: 500
       timeoutSeconds: 300
