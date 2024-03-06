@@ -30,7 +30,7 @@ spec:
               containerPort: 80
           resources:
             limits:
-              memory: 1024Mi
+              memory: 512Mi
               cpu: 1000m
   traffic:
     - percent: 100
