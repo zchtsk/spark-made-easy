@@ -104,11 +104,11 @@ function SmallPrint() {
       <p className="text-xs text-zinc-600 dark:text-zinc-400">
         &copy; Copyright {new Date().getFullYear()}. All rights reserved.
       </p>
-      <div className="flex gap-4">
-        <SocialLink href="https://github.com/zchtsk" icon={GitHubIcon}>
-          Follow on GitHub
-        </SocialLink>
-      </div>
+      {/*<div className="flex gap-4">*/}
+      {/*  <SocialLink href="https://github.com/zchtsk" icon={GitHubIcon}>*/}
+      {/*    Follow on GitHub*/}
+      {/*  </SocialLink>*/}
+      {/*</div>*/}
     </div>
   )
 }
