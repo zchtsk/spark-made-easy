@@ -63,19 +63,19 @@ df.select("country", reverse_word("country").alias("yrtnuoc")).show(4, True)
 
 # Method 2. Use them as a decorator
 @F.udf("String") # return type
-def reverse_word2(col) -> int:
+def reverse_word2(col) -> str:
     return col[::-1]
 
 df.select("country", reverse_word2("country").alias("yrtnuoc")).show(4, True)
 
-# +--------+-------+
-# | country|yrtnuoc|
-# +--------+-------+
-# |   Italy|   NULL|
-# |Portugal|   NULL|
-# |      US|   NULL|
-# |      US|   NULL|
-# +--------+-------+
+# +--------+--------+
+# | country| yrtnuoc|
+# +--------+--------+
+# |   Italy|   ylatI|
+# |Portugal|lagutroP|
+# |      US|      SU|
+# |      US|      SU|
+# +--------+--------+
 ```
 
 ## Pandas UDFs
