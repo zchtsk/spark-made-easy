@@ -120,9 +120,9 @@ result_df.show(4)
 
 Generally, joins are where people tend to shoot themselves in the foot. It's easy to blow up your dataset through duplication, mix up columns through column duplication, or to just make a mess of things.{{ className: "lead" }}
 
-1. **Be as explicit with columns** being included in each dataset before you join.{{ className: "lead" }}
-2. **If you are joining on the exact same columns in both dataframes**, use the "simple" method.{{ className: "lead" }}
-3. **If you have to do "complex" joins, use expressions and aliasing** your dataframes. (See below){{ className: "lead" }}
+1. **Use the "simple" method where possible** if you are joining on the same columns in both dataframes.{{ className: "lead" }}
+2. **Be explicit with column selection in each dataset before you join** and remove unused columns.{{ className: "lead" }}
+3. **If you have to do "complex" joins, use expressions and aliasing** in your join logic. (See below){{ className: "lead" }}
 
 Here's an example.{{ className: "lead" }}
 
