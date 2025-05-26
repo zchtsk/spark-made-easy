@@ -25,7 +25,7 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="en" className="h-full" suppressHydrationWarning>
-    <script async src="https://umami.tsklp.co/script.js"
+    <script async src="https://umami.zachtsk.com/script.js"
             data-website-id="f78a7942-2247-42d8-8db2-ca19509e635c"></script>
     <Canonical></Canonical>
     <body className="flex min-h-full bg-white antialiased dark:bg-zinc-900">
