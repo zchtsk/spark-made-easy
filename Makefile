@@ -12,3 +12,6 @@ deploy: build
 
 undeploy:
 	doppler run --command="sh ./scripts/undeploy.sh"
+
+deploy_hetz: build
+	docker-compose -f docker-compose-hetz.yaml up -d --build
