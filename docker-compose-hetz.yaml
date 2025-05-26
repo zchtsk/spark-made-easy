@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  easyspark:
+    build: .
+    image: zachtsk/spark-made-easy:latest
+    container_name: spark-made-easy
+
+
+networks:
+  default:
+    external: true
+    name: firehose_nginx
