@@ -15,3 +15,6 @@ undeploy:
 
 deploy_hetz: build
 	docker-compose -f docker-compose-hetz.yaml up -d --build
+
+update:
+	ssh hetz "cd /root/spark-made-easy && git pull && make deploy_hetz"
