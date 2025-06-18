@@ -2,7 +2,7 @@ version: '3.8'
 services:
   easyspark:
     build: .
-    image: zachtsk/spark-made-easy:latest
+    image: zchtsk/spark-made-easy:latest
     container_name: spark-made-easy
     ports:
       - 80:80
